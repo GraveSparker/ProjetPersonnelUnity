@@ -477,13 +477,33 @@ PrefabInstance:
       propertyPath: health
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 4023004161981043249, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
-      propertyPath: speed
-      value: 1.5
+    - target: {fileID: -3105511547311543203, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+      propertyPath: recoilFactor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3105511547311543203, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+      propertyPath: recoilLength
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3105511547311543203, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+      propertyPath: knockbackToSelf.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3105511547311543203, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+      propertyPath: knockbackToSelf.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4023004161981043249, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
-      propertyPath: startDirection
-      value: -1
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689575071439016233, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+      propertyPath: m_Size.x
+      value: 0.59451246
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689575071439016233, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0024175644
       objectReference: {fileID: 0}
     - target: {fileID: 6900967303732878352, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
       propertyPath: m_LocalScale.x
@@ -543,13 +563,78 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7349928402004805506, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
       propertyPath: m_Name
-      value: Slime
+      value: SlimeBoss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6900967303732878352, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1557043602}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7349928402004805506, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 623006618}
+    - targetCorrespondingSourceObject: {fileID: 7349928402004805506, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 623006620}
   m_SourcePrefab: {fileID: 100100000, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+--- !u!1 &623006615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7349928402004805506, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+  m_PrefabInstance: {fileID: 623006614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &623006616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3105511547311543203, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+  m_PrefabInstance: {fileID: 623006614}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623006615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088a9ebab50c7dd45b233ea0f38563ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyCollisions
+--- !u!50 &623006617 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 8534440773239102376, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+  m_PrefabInstance: {fileID: 623006614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &623006618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623006615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349c6ff521677564f8840c88122bd44a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossJump
+  rigidBody: {fileID: 623006617}
+  enemy: {fileID: 623006616}
+  shockwavePrefab: {fileID: 6380037051266519735, guid: 2034b29f66859904781cffa6a95c229b, type: 3}
+  shockwaveSpawnPoint: {fileID: 1557043602}
+  jumpForce: 10
+  delayBetweenJumps: 6
+--- !u!4 &623006619 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6900967303732878352, guid: 249d3bd17f38fdf498a5250c658d45e5, type: 3}
+  m_PrefabInstance: {fileID: 623006614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &623006620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623006615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d68700a366373448ba438524f53c80f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossController
 --- !u!1001 &702468405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -568,7 +653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4694042131330029201, guid: 5f9dff54e26b0b6439e71f51a67f0009, type: 3}
       propertyPath: m_Size.x
-      value: 0.5178375
+      value: 1.1545448
       objectReference: {fileID: 0}
     - target: {fileID: 4694042131330029201, guid: 5f9dff54e26b0b6439e71f51a67f0009, type: 3}
       propertyPath: m_Size.y
@@ -576,7 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4694042131330029201, guid: 5f9dff54e26b0b6439e71f51a67f0009, type: 3}
       propertyPath: m_Offset.x
-      value: -0.818779
+      value: -1.1371326
       objectReference: {fileID: 0}
     - target: {fileID: 4694042131330029201, guid: 5f9dff54e26b0b6439e71f51a67f0009, type: 3}
       propertyPath: m_Offset.y
@@ -1598,6 +1683,37 @@ Transform:
   - {fileID: 731408636}
   - {fileID: 1097639444}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1557043601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1557043602}
+  m_Layer: 0
+  m_Name: ShockWaveSpawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1557043602
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557043601}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.022999763, y: -0.5450001, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 623006619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1627230773
 GameObject:
@@ -4264,11 +4380,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7614501846883111150, guid: a0807c04c55ece74cbe240e6acdd6be5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.31
+      value: -14.06
       objectReference: {fileID: 0}
     - target: {fileID: 7614501846883111150, guid: a0807c04c55ece74cbe240e6acdd6be5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.86
+      value: 7.71
       objectReference: {fileID: 0}
     - target: {fileID: 7614501846883111150, guid: a0807c04c55ece74cbe240e6acdd6be5, type: 3}
       propertyPath: m_LocalPosition.z

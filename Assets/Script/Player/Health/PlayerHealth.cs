@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     public GameManager gameManager;
     public static Action<int> OnPlayerTakeDamage;
+    public static Action<int> OnPlayerRestoreHealth;
     public static Action OnPlayerDie;
 
     private bool isDead;
@@ -48,6 +49,23 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private void RestoreHealth(int healthRestored)
+    {
+        currentHealth += healthRestored;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        OnPlayerRestoreHealth.Invoke(currentHealth);
+    }
+
+    private void OnEnable()
+    {
+        HealthPickup.OnHealthCollected += RestoreHealth;
+    }
+
+    private void OnDisable()
+    {
+        HealthPickup.OnHealthCollected -= RestoreHealth;
+    }
+
     private IEnumerator Invulnerability()
     {
         Physics2D.IgnoreLayerCollision(6, 8, true);
@@ -70,8 +88,20 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator DeathRoutine()
     {
-        yield return new WaitForSeconds(1f); // animation length
-        gameManager.gameOver();
-        Destroy(gameObject);
+        yield return new WaitForSeconds(0f); // animation length
+        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        if (currentScene == "Room_Boss")
+        {
+            //NO RESPAWN IN BOSS ROOM
+            gameManager.gameOverInBoss();
+            Destroy(gameObject);
+        }
+        else
+        {
+            //NORMAL DEATH FLOW (respawn handled elsewhere)
+            gameManager.gameOver();
+            Destroy(gameObject);
+        }
     }
 }

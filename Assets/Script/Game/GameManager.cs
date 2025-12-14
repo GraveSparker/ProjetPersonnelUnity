@@ -1,17 +1,28 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private CanvasGroup winScreenCanvasGroup;
+    [SerializeField] private float winFadeDuration = 0.75f;
+
     public string transitionedFromScene;
 
     public Vector2 platformingRespawnPoint;
 
+    public bool canRespawnPlayer = true;
+
     public GameObject gameOverUI;
     public GameObject mainMenu;
+    public GameObject winScreen;
+    public GameObject healthBar;
+    public GameObject restartButton;
+    public GameObject restartBossButton;
 
     public HashSet<string> CollectedCoins = new HashSet<string>();
+    public HashSet<string> CollectedHealth = new HashSet<string>();
 
 
     public static GameManager Instance { get; private set; }
@@ -34,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (gameOverUI.activeInHierarchy || mainMenu.activeInHierarchy)
+        if (gameOverUI.activeInHierarchy || mainMenu.activeInHierarchy || winScreen.activeInHierarchy)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -78,16 +89,75 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator FadeInWinScreen()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < winFadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            winScreenCanvasGroup.alpha = Mathf.Clamp01(elapsed / winFadeDuration);
+            yield return null;
+        }
+
+        winScreenCanvasGroup.alpha = 1f;
+    }
+
     public void gameOver()
     {
+        canRespawnPlayer = true;
         gameOverUI.SetActive(true);
+        restartButton.SetActive(true);
+        restartBossButton.SetActive(false);
         Time.timeScale = 0f;   // freeze game
+    }
+
+    public void gameOverInBoss()
+    {
+        canRespawnPlayer = false;
+        gameOverUI.SetActive(true);
+        restartBossButton.SetActive(true);
+        restartButton.SetActive(false);
+        Time.timeScale = 0f;
+    }
+
+    public void WinGame()
+    {
+        winScreen.SetActive(true);
+
+        // Disable player
+        if (PlayerMovement.Instance != null)
+        {
+            PlayerMovement.Instance.enabled = false;
+        }
+
+        if (FindAnyObjectByType<PlayerAttack>() != null)
+        {
+            FindAnyObjectByType<PlayerAttack>().enabled = false;
+        }
+        healthBar.SetActive(false);
+
+        // Prepare fade
+        winScreenCanvasGroup.alpha = 0f;
+
+        // Freeze gameplay (UI still works)
+        Time.timeScale = 0f;
+
+        // Start fade using unscaled time
+        StartCoroutine(FadeInWinScreen());
     }
 
     public void restart()
     {
         Time.timeScale = 1f;   // unfreeze
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameOverUI.SetActive(false);
+    }
+
+    public void restartBoss()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Room_2");
         gameOverUI.SetActive(false);
     }
 

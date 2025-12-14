@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5689575071439016233}
   - component: {fileID: 8534440773239102376}
   - component: {fileID: 1181399973576881464}
+  - component: {fileID: -3693278515275230466}
   - component: {fileID: 4023004161981043249}
   - component: {fileID: -3105511547311543203}
-  - component: {fileID: -3693278515275230466}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Enemy
@@ -155,7 +155,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1212561491
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 2688514, guid: 5e36cb08e3e483d4392b031a63521994, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -168,6 +168,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &-3693278515275230466
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7349928402004805506}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 27163ff5dc1b22644aadd602560f0c5f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4023004161981043249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,34 +221,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCollisions
   rigidBody: {fileID: 8534440773239102376}
+  hitCollider: {fileID: 5689575071439016233}
   enemyMoveScript: {fileID: 4023004161981043249}
+  animator: {fileID: -3693278515275230466}
   knockbackToSelf: {x: 1, y: 3}
   knockbackToPlayer: {x: 6, y: 5}
   knockbackDelayToSelf: 0.9
+  destroyDelay: 0.8
   damage: 2
   health: 3
   recoilLength: 0.5
   recoilFactor: 2
   isRecoiling: 0
---- !u!95 &-3693278515275230466
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7349928402004805506}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 27163ff5dc1b22644aadd602560f0c5f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

@@ -3,17 +3,23 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rigidBody;
+    [SerializeField] private Collider2D hitCollider;
     [SerializeField] private EnemyMovement enemyMoveScript;
+    [SerializeField] private Animator animator;
+
     [SerializeField] private Vector2 knockbackToSelf = new Vector2(3f, 5f);
     [SerializeField] private Vector2 knockbackToPlayer = new Vector2(3f, 5f);
     [SerializeField] private float knockbackDelayToSelf = 1.5f;
+    [SerializeField] private float destroyDelay = 0.8f;
     [SerializeField] private int damage = 3;
     [SerializeField] private int health = 3;
+
     [SerializeField] private float recoilLength;
     [SerializeField] private float recoilFactor;
     [SerializeField] private bool isRecoiling = false;
 
     private float recoilTimer;
+    private bool isDead = false;
 
     private void Update()
     {
@@ -42,6 +48,12 @@ public class Enemy : MonoBehaviour
     {
         health -= _damageDone;
 
+        if (animator != null)
+        {
+            animator.ResetTrigger("Hit");
+            animator.SetTrigger("Hit");
+        }
+
         // Start recoil
         isRecoiling = true;
         recoilTimer = 0f;
@@ -58,7 +70,31 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        if (isDead)
+            return;
+
+        isDead = true;
+
+        // Stop all behavior
+        enemyMoveScript.enabled = false;
+        rigidBody.linearVelocity = Vector2.zero;
+        rigidBody.simulated = false;
+
+        // Disable collisions so player can't be hurt
+        if (hitCollider != null)
+            hitCollider.enabled = false;
+
+        // Play death animation
+        if (animator != null)
+        {
+            animator.ResetTrigger("Hit");
+            animator.SetTrigger("Death");
+        }
+
+        GetComponent<BossController>()?.OnBossDefeated();
+
+        // Destroy after animation
+        Destroy(gameObject, destroyDelay);
     }
 
     public void HitPlayer(Transform playerTransform)

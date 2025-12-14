@@ -16,7 +16,12 @@ public class PlayerCollisions : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
-            other.GetComponent<Coin>().Collect();
+            other.GetComponent<Coin>().CollectCoins();
+        }
+
+        if (other.CompareTag("HealthPickup"))
+        {
+            other.GetComponent<HealthPickup>().CollectHealth();
         }
     }
 
