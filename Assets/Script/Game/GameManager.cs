@@ -103,6 +103,11 @@ public class GameManager : MonoBehaviour
         winScreenCanvasGroup.alpha = 1f;
     }
 
+    public void ResetCollectedHealthOnDeath()
+    {
+        CollectedHealth.Clear();
+    }
+
     public void gameOver()
     {
         canRespawnPlayer = true;

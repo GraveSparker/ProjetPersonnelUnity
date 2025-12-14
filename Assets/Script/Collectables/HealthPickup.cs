@@ -19,6 +19,12 @@ public class HealthPickup : MonoBehaviour
 
     public void CollectHealth()
     {
+        PlayerHealth playerHealth = FindAnyObjectByType<PlayerHealth>();
+
+        // If player doesn't exist or is already full, do nothing
+        if (playerHealth == null || playerHealth.currentHealth >= playerHealth.maxHealth)
+            return;
+
         // Save as collected
         if (!GameManager.Instance.CollectedHealth.Contains(healthPickupID))
             GameManager.Instance.CollectedHealth.Add(healthPickupID);

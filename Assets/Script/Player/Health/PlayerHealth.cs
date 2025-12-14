@@ -53,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth += healthRestored;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        OnPlayerRestoreHealth.Invoke(currentHealth);
+        OnPlayerRestoreHealth?.Invoke(currentHealth);
     }
 
     private void OnEnable()
@@ -94,12 +94,14 @@ public class PlayerHealth : MonoBehaviour
         if (currentScene == "Room_Boss")
         {
             //NO RESPAWN IN BOSS ROOM
+            gameManager.ResetCollectedHealthOnDeath();
             gameManager.gameOverInBoss();
             Destroy(gameObject);
         }
         else
         {
             //NORMAL DEATH FLOW (respawn handled elsewhere)
+            gameManager.ResetCollectedHealthOnDeath();
             gameManager.gameOver();
             Destroy(gameObject);
         }

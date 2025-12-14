@@ -16,6 +16,7 @@ public class HUDController : MonoBehaviour
     {
         GameController.OnPlayerSpawned += OnPlayerSpawned;
         PlayerHealth.OnPlayerTakeDamage += OnPlayerTakeDamage; // static event on PlayerHealth
+        PlayerHealth.OnPlayerRestoreHealth += OnPlayerRestoreHealth;
         Coin.OnCoinCollected += CollectCoin;
         PlayerHealth.OnPlayerDie += OnPlayerDie;               // optional: react to death
     }
@@ -25,6 +26,7 @@ public class HUDController : MonoBehaviour
     {
         GameController.OnPlayerSpawned -= OnPlayerSpawned;
         PlayerHealth.OnPlayerTakeDamage -= OnPlayerTakeDamage;
+        PlayerHealth.OnPlayerRestoreHealth -= OnPlayerRestoreHealth;
         Coin.OnCoinCollected -= CollectCoin;
         PlayerHealth.OnPlayerDie -= OnPlayerDie;
     }
@@ -51,6 +53,13 @@ public class HUDController : MonoBehaviour
     private void OnPlayerTakeDamage(int currentHealth)
     {
         // Guard: if we have a stored player, use its maxHealth; otherwise safe fallback
+        int max = (currentPlayerHealth != null) ? currentPlayerHealth.maxHealth : 1;
+        float normalized = (float)currentHealth / Mathf.Max(1, max);
+        healthBarUI.SetFill(normalized);
+    }
+
+    private void OnPlayerRestoreHealth(int currentHealth)
+    {
         int max = (currentPlayerHealth != null) ? currentPlayerHealth.maxHealth : 1;
         float normalized = (float)currentHealth / Mathf.Max(1, max);
         healthBarUI.SetFill(normalized);

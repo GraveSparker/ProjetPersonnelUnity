@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4559749076917321517}
   - component: {fileID: 1422740636880488279}
-  - component: {fileID: 4060172174866700837}
   - component: {fileID: 3943958154773648500}
+  - component: {fileID: 4060172174866700837}
   m_Layer: 0
   m_Name: HealthPickup
   m_TagString: HealthPickup
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1212561491
   m_SortingLayer: 7
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -285062604, guid: 361c555f1ba2fa240bb76555793f227f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -92,20 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4060172174866700837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5987353526550801703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84a546132f0f82a4da026b4f30cb2ef5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthPickup
-  healthPickupID: Health_RoomStart
-  healthRecovered: 2
 --- !u!58 &3943958154773648500
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -142,3 +128,17 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.6
+--- !u!114 &4060172174866700837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5987353526550801703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a546132f0f82a4da026b4f30cb2ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthPickup
+  healthPickupID: Health_RoomStart
+  healthRecovered: 2
