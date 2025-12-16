@@ -137,7 +137,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.96258163, y: 0.76799583}
+  m_Size: {x: 1, y: 0.76799583}
   m_EdgeRadius: 0
 --- !u!50 &944922578118470860
 Rigidbody2D:
@@ -179,7 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spikes
   rigidBody: {fileID: 1019450783564729151, guid: 1ccccde88be0aaf4a8d98e2975861a78, type: 3}
-  collider: {fileID: -7941527015205565028, guid: 1ccccde88be0aaf4a8d98e2975861a78, type: 3}
+  playerPhysicsCollider: {fileID: -7941527015205565028, guid: 1ccccde88be0aaf4a8d98e2975861a78, type: 3}
+  spikeCollider: {fileID: 8391384785047112054}
   frictionlessMaterial: {fileID: 6200000, guid: f0bbdbf061296cc4cbe4e94a4f7a747a, type: 2}
   highFrictionMaterial: {fileID: 6200000, guid: c11302b4a6d3654439c9d14da1776540, type: 2}
   damage: 2

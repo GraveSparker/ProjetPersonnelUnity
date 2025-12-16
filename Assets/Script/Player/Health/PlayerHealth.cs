@@ -20,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
     public static Action OnPlayerDie;
 
     private bool isDead;
+    private bool isInvulnerable;
 
 
     void Awake()
@@ -31,17 +32,22 @@ public class PlayerHealth : MonoBehaviour
 
     public void DamagePlayer(int damageAmount)
     {
+        if (isInvulnerable || isDead)
+            return;
+
+        isInvulnerable = true; //LOCK IMMEDIATELY
+
         currentHealth -= damageAmount;
         OnPlayerTakeDamage?.Invoke(currentHealth);
 
-        if (currentHealth <= 0 && !isDead)
+        if (currentHealth <= 0)
         {
             isDead = true;
             OnPlayerDie?.Invoke();
             playerMovementState.SetMoveState(PlayerMovementState.MoveState.Death);
             StartCoroutine(DeathRoutine());
         }
-        else if (currentHealth > 0)
+        else
         {
             StartCoroutine(Invulnerability());
             playerMovementState.SetMoveState(PlayerMovementState.MoveState.Hurt);
@@ -77,6 +83,8 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes));
         }
         Physics2D.IgnoreLayerCollision(6, 8, false);
+
+        isInvulnerable = false;
     }
 
     private IEnumerator HurtStateLock()

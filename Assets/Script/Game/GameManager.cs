@@ -93,6 +93,8 @@ public class GameManager : MonoBehaviour
     {
         float elapsed = 0f;
 
+        yield return new WaitForSecondsRealtime(1f);
+
         while (elapsed < winFadeDuration)
         {
             elapsed += Time.unscaledDeltaTime;
@@ -101,6 +103,12 @@ public class GameManager : MonoBehaviour
         }
 
         winScreenCanvasGroup.alpha = 1f;
+    }
+
+    private IEnumerator StopTime()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 0f;
     }
 
     public void ResetCollectedHealthOnDeath()
@@ -145,11 +153,10 @@ public class GameManager : MonoBehaviour
         // Prepare fade
         winScreenCanvasGroup.alpha = 0f;
 
-        // Freeze gameplay (UI still works)
-        Time.timeScale = 0f;
-
         // Start fade using unscaled time
         StartCoroutine(FadeInWinScreen());
+
+        StartCoroutine(StopTime());
     }
 
     public void restart()

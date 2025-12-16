@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Room_1.unity
     guid: 7725a1c4d0b0edc46bd2e78572e4045d
   - enabled: 1
+    path: Assets/Scenes/Room_Parkour.unity
+    guid: 2643af7c33bd2fc4b8ad55713d93a2eb
+  - enabled: 1
     path: Assets/Scenes/Room_2.unity
     guid: 468107be29febbc42a35c0da335f26e4
   - enabled: 1

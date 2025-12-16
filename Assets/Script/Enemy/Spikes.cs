@@ -5,14 +5,15 @@ public class Spikes : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody2D rigidBody;
-    [SerializeField] private new Collider2D collider;
+    [SerializeField] private Collider2D playerPhysicsCollider;
+    [SerializeField] private Collider2D spikeCollider;
     [SerializeField] private PhysicsMaterial2D frictionlessMaterial;
     [SerializeField] private PhysicsMaterial2D highFrictionMaterial;
     [SerializeField] private int damage = 2;
 
-    private void OnTriggerEnter2D(Collider2D _other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             StartCoroutine(RespawnPoint());
         }
@@ -27,10 +28,10 @@ public class Spikes : MonoBehaviour
         FindAnyObjectByType<PlayerHealth>().DamagePlayer(damage);
         PlayerMovement.Instance.transform.position = GameManager.Instance.platformingRespawnPoint;
         StartCoroutine(HoldPlayerStill(rigidBody));
-        collider.sharedMaterial = highFrictionMaterial;
+        playerPhysicsCollider.sharedMaterial = highFrictionMaterial;
         yield return UIManager.Instance.sceneFader.StartCoroutine(UIManager.Instance.sceneFader.Fade(SceneFader.FadeDirection.Out));
         yield return new WaitForSecondsRealtime(0.1f);
-        collider.sharedMaterial = frictionlessMaterial;
+        playerPhysicsCollider.sharedMaterial = frictionlessMaterial;
         PlayerMovement.Instance.pState.cutscene = false;
         Physics2D.IgnoreLayerCollision(6, 9, false);
     }
